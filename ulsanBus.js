@@ -141,7 +141,6 @@ Module.register("ulsanBus", {
 
 					var displayRouteCounter = 0;
 					// maxDisplayRoute 초과해서 표시 안 되는 노선들 간략하게 표시하는 span element 저장 배열
-					var briefRouteElements = [];
 
 					for (JSON_arrivalRouteNM_Ordered of self.busStopData['arrival_Order']) {
 						// Log.log(JSON_arrivalRouteNM_Ordered);
