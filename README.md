@@ -1,5 +1,6 @@
 # MMM-UlsanBus
-MM2 module displays ulsan bus information.
+MM2 module displays ulsan bus information.   
+울산 버스정보를 표시하는 MM2 모듈입니다.
 
 ![Alt text](/ulsanBus.png)         
 
