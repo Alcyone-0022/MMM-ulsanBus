@@ -149,7 +149,8 @@ Module.register("ulsanBus", {
 
 				lineElem = document.createElement('p');
 				lineElem.style.margin = '5px 0px 0px 2px';
-
+				
+				// Route Number
 				arrivalRouteNM = document.createElement('span');
 				arrivalRouteNM.innerHTML = JSON_arrivalRouteNM_Ordered;
 				arrivalRouteNM.style.fontWeight = 'bold';
@@ -217,8 +218,8 @@ Module.register("ulsanBus", {
                 var busStopBoxElem = this.busStopBoxObjDict[self.busStopData['stopID']];
                 busStopBoxElem.removeChild(busStopBoxElem.children[1]);
                 busStopBoxElem.append(arrivalRouteElem);
-				break;
-		}
+		break;
+	}
     },
     getBusArrivalData: function() {
         var self = this;
