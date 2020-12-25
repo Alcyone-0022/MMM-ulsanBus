@@ -66,10 +66,10 @@ Module.register("MMM-ulsanBus", {
             // 정류장들 순환 표시
             var currentDisplayIndex = this.displayIndex;
             for (let i = currentDisplayIndex; i < currentDisplayIndex + this.config.maxDisplayBusStops; i++) {
-		var dictKeys = Object.keys(this.config.busstop);
-                container.append(this.busStopBoxObjDict[this.config.busstop[dictKeys[i]][0]]);
-                this.displayIndex++;
-		if (this.displayIndex >= this.numberOfBusStops) { break; }
+				var dictKeys = Object.keys(this.config.busstop);
+				container.append(this.busStopBoxObjDict[this.config.busstop[dictKeys[i]][0]]);
+				this.displayIndex++;
+				if (this.displayIndex >= this.numberOfBusStops) { break; }
             }
 
             if (this.displayIndex >= this.numberOfBusStops) {
@@ -84,8 +84,8 @@ Module.register("MMM-ulsanBus", {
         switch (notification) {
             case "DOM_OBJECTS_CREATED": // Log.log(typeof busStopData);
                 self.getBusArrivalData();
-		// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
-		// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
+				// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
+				// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
                 self.updateDomInterval = setInterval(function() {
                     self.updateDom();
                     // Log.log('updated');
@@ -142,7 +142,6 @@ Module.register("MMM-ulsanBus", {
 					arrivalRouteElem.append(arrivesSoonElem);
 
 					var displayRouteCounter = 0;
-					// maxDisplayRoute 초과해서 표시 안 되는 노선들 간략하게 표시하는 span element 저장 배열
 
 					for (JSON_arrivalRouteNM_Ordered of self.busStopData['arrival_Order']) {
 						// Log.log(JSON_arrivalRouteNM_Ordered);
@@ -191,9 +190,25 @@ Module.register("MMM-ulsanBus", {
 							arrivalRouteElem.appendChild(briefArrivalRoute);
 							continue;
 						}
+						
+						// 남은 정류장
+						busStopData_html += '<br>'
+						busStopData_html += "<i class=\"fas fa-arrow-left\"></i> ";
+						busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][1];
+						// 현재 정류장
+						busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][2];
 
+						arrivalRouteInfo.innerHTML = busStopData_html;
+						arrivalRouteInfo.style.color = 'white';
 
+						lineElem.appendChild(arrivalRouteNM);
+						lineElem.appendChild(arrivalRouteInfo);
 
+						arrivalRouteElem.appendChild(lineElem);
+
+						displayRouteCounter++;
+						
+						
 						// 이전에 추가한 요소들 삭제하고 다시 추가
 						var busStopBoxElem = this.busStopBoxObjDict[self.busStopData['stopID']];
 						busStopBoxElem.removeChild(busStopBoxElem.children[1]);
