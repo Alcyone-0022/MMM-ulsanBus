@@ -63,7 +63,8 @@ else:
         if arrivalTime < arrives_soon_cut:
             # print('곧 도착', end=', ')
             busArrivalDataList.append('곧 도착')
-            busstop_routeArrivesSoon.append(routeNM_intonly)
+            if routeNM_intonly not in busstop_routeArrivesSoon:
+                busstop_routeArrivesSoon.append(routeNM_intonly)
         else:
             # print(str(int(arrivalTime / 60)) + '분', end=", ")
             busArrivalDataList.append(str(int(arrivalTime / 60)) + '분')
@@ -75,7 +76,7 @@ else:
         # print(presentStop + ')')
         busArrivalDataList.append('(' + presentStop + ')')
 
-        if routeNM_intonly not in busstop_arrivalOrder:
+        if routeNM_intonly not in busstop_arrivalDataDict:
             busstop_arrivalDataDict[routeNM_intonly] = busArrivalDataList
             busstop_arrivalOrder.append(routeNM_intonly)
             # busstop_arrivalDataDict[routeNM] = busArrivalDataString
