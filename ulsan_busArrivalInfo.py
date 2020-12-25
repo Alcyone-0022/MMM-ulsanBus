@@ -19,8 +19,12 @@ stopID = int(terminal_input[0])
 arrives_soon_cut = int(terminal_input[1])
 
 # request data
+<<<<<<< HEAD
 # key = "TRekJec4iz%2BlT5wZwy56C3AxHC3YaM35svqI7HHTMx0PM3K%2BsuVZbVnRN8BAv%2BTgA6eAAXeT5m865H%2BvKW%2BecA%3D%3D"
 key = terminal_input[2]
+=======
+key = "YOUR_KEY_HERE"
+>>>>>>> 71b10e0df14ddff7b2aee75f86f10a647d39105d
 
 # # 대륙2차 193012613 법원(공업탑R방면) 193040605
 # stopID = 193040605
