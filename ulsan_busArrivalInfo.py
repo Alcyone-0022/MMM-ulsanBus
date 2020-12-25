@@ -77,7 +77,7 @@ else:
         presentStop = i.findtext('PRESENTSTOPNM')
         # print(presentStop + ')')
         busArrivalDataList.append('(' + presentStop + ')')
-        
+
         if routeNM_intonly not in busstop_arrivalOrder:
             busstop_arrivalDataDict[routeNM_intonly] = busArrivalDataList
             busstop_arrivalOrder.append(routeNM_intonly)
@@ -97,9 +97,9 @@ def sortDict(dictToSort):
 if len(busstop_arrivalDataDict) < 1:
     busstop_arrivalDataDict["no_data"] = "no_data"
     busstop_arrivalDataDict["stopID"] = stopID
-    print(json.dumps(busstop_arrivalDataDict, ensure_ascii = False))
+    print(json.dumps(busstop_arrivalDataDict, ensure_ascii=False))
 else:
     busstop_arrivalDataDict["arrives_soon"] = busstop_routeArrivesSoon
     busstop_arrivalDataDict["stopID"] = stopID
     busstop_arrivalDataDict["arrival_Order"] = busstop_arrivalOrder
-    print(json.dumps(busstop_arrivalDataDict, ensure_ascii = False))
+    print(json.dumps(busstop_arrivalDataDict, ensure_ascii=False))
