@@ -1,10 +1,10 @@
 Module.register("MMM-ulsanBus", {
     defaults: {
-	busstop: {},
-	updateInterval: 30000,
-	busStopUpdateInterval: 10000,
-	maxDisplayRoute: 15,
-	maxDisplayBusStops: 2,
+		busstop: {},
+		updateInterval: 30000,
+		busStopUpdateInterval: 10000,
+		maxDisplayRoute: 15,
+		maxDisplayBusStops: 2,
     },
     start: function() {
         var self = this;
@@ -26,26 +26,26 @@ Module.register("MMM-ulsanBus", {
         this.displayIndex = 0;
 
         for (busStop in this.config.busstop) {
-            Log.log(busStop);
-            var busStopBox = document.createElement("div");
-            busStopBox.className = "box";
-            var busStopTitle = document.createElement("div");
-            busStopTitle.id = "busstop_title";
-            busStopTitle.innerHTML = '<i class="fas fa-bus"></i>' + busStop;
-            // Log.log("Creating busstop " + busStop);
-            busStopBox.appendChild(busStopTitle);
-            // child element 삭제 시를 위한 dummy
-            busStopBox.appendChild(document.createElement("div"));
+		Log.log(busStop);
+		var busStopBox = document.createElement("div");
+		busStopBox.className = "box";
+		var busStopTitle = document.createElement("div");
+		busStopTitle.id = "busstop_title";
+		busStopTitle.innerHTML = '<i class="fas fa-bus"></i>' + busStop;
+		// Log.log("Creating busstop " + busStop);
+		busStopBox.appendChild(busStopTitle);
+		// child element 삭제 시를 위한 dummy
+		busStopBox.appendChild(document.createElement("div"));
 
-            this.busStopBoxObjDict[this.config.busstop[busStop][0]] = busStopBox;
-            // Log.log(typeof busStopBox);
-            // Log.log(typeof this.busStopBoxObjDict[this.config.busstop[busStop][0]]);
-            // Log.log(this.busStopBoxObjDict);
+		this.busStopBoxObjDict[this.config.busstop[busStop][0]] = busStopBox;
+		// Log.log(typeof busStopBox);
+		// Log.log(typeof this.busStopBoxObjDict[this.config.busstop[busStop][0]]);
+		// Log.log(this.busStopBoxObjDict);
 
-            // busStopBoxObjDict를 stopID로 접근하면 됨.
-            // socketNotificationReceived에서 한번에 처리하기!
-			
-			this.config.busstop[busStop].push(this.config.key);
+		// busStopBoxObjDict를 stopID로 접근하면 됨.
+		// socketNotificationReceived에서 한번에 처리하기!
+
+		this.config.busstop[busStop].push(this.config.key);
         }
     },
     getStyles: function() {
@@ -151,8 +151,12 @@ Module.register("MMM-ulsanBus", {
 
 				lineElem = document.createElement('p');
 				lineElem.style.margin = '5px 0px 0px 2px';
+<<<<<<< HEAD
 				
 				// Route Number
+=======
+
+>>>>>>> c5f6b4eac07ca8ad22a3ef6b40ad3d207d3591e6
 				arrivalRouteNM = document.createElement('span');
 				arrivalRouteNM.innerHTML = JSON_arrivalRouteNM_Ordered;
 				arrivalRouteNM.style.fontWeight = 'bold';
@@ -189,6 +193,7 @@ Module.register("MMM-ulsanBus", {
 					// briefArrivalRoute.append(document.createElement('br'));
 
 					arrivalRouteElem.appendChild(briefArrivalRoute);
+<<<<<<< HEAD
 
 					displayRouteCounter++;
 					// briefRouteElements.push(briefArrivalRoute);
@@ -212,6 +217,40 @@ Module.register("MMM-ulsanBus", {
 
 				displayRouteCounter++;
 			}
+=======
+
+					displayRouteCounter++;
+					// briefRouteElements.push(briefArrivalRoute);
+					continue;
+				}
+
+				// 남은 정류장
+				busStopData_html += '<br>'
+				busStopData_html += "<i class=\"fas fa-arrow-left\"></i> ";
+				busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][1];
+				// 현재 정류장
+				busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][2];
+
+				arrivalRouteInfo.innerHTML = busStopData_html;
+				arrivalRouteInfo.style.color = 'white';
+
+				lineElem.appendChild(arrivalRouteNM);
+				lineElem.appendChild(arrivalRouteInfo);
+
+				arrivalRouteElem.appendChild(lineElem);
+
+				displayRouteCounter++;
+			}
+		}
+
+
+
+                // 이전에 추가한 요소들 삭제하고 다시 추가
+                var busStopBoxElem = this.busStopBoxObjDict[self.busStopData['stopID']];
+                busStopBoxElem.removeChild(busStopBoxElem.children[1]);
+                busStopBoxElem.append(arrivalRouteElem);
+		break;
+>>>>>>> c5f6b4eac07ca8ad22a3ef6b40ad3d207d3591e6
 		}
 
                 
