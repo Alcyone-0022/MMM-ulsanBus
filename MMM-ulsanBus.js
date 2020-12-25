@@ -1,10 +1,10 @@
 Module.register("MMM-ulsanBus", {
     defaults: {
-        busstop: {},
-        updateInterval: 30000,
+	busstop: {},
+	updateInterval: 30000,
 	busStopUpdateInterval: 10000,
-        maxDisplayRoute: 15,
-        maxDisplayBusStops: 2,
+	maxDisplayRoute: 15,
+	maxDisplayBusStops: 2,
     },
     start: function() {
         var self = this;
@@ -216,10 +216,10 @@ Module.register("MMM-ulsanBus", {
 
                 
 
-                // 이전에 추가한 요소들 삭제하고 다시 추가
-                var busStopBoxElem = this.busStopBoxObjDict[self.busStopData['stopID']];
-                busStopBoxElem.removeChild(busStopBoxElem.children[1]);
-                busStopBoxElem.append(arrivalRouteElem);
+		// 이전에 추가한 요소들 삭제하고 다시 추가
+		var busStopBoxElem = this.busStopBoxObjDict[self.busStopData['stopID']];
+		busStopBoxElem.removeChild(busStopBoxElem.children[1]);
+		busStopBoxElem.append(arrivalRouteElem);
 		break;
 	}
     },
