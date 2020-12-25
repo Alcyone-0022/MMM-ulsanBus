@@ -12,7 +12,7 @@ ulsan_busArrivalInfo.py 의 22번째 줄 key 변수에 넣고 사용하시면 �
 ``` JS
 modules: [
   {
-    module: "ulsanBus",
+    module: "MMM-ulsanBus",
     position: "top_center",
     config: {
       busstop: {
@@ -27,6 +27,7 @@ modules: [
       busStopUpdateInterval: 10000,
       maxDisplayRoute: 8,
       maxDisplayBusStops: 2,
+      key: 'YOUR_KEY_HERE',
     }
   },
 ]
@@ -41,7 +42,8 @@ modules: [
 **updateInterval** : 울산 BIS정보 API에 버스정보를 요청하는 시간(ms 단위)   
 **busStopUpdateInterval** : **busstop**에 등록한 버스 정류장 수가 **maxDisplayBusStops** 보다 많을 때, MM2에 표시되는 버스 정류장들을 순환 표시하는 시간(ms 단위)   
 **maxDisplayRoute** : MM2에 표시할 정류장 당 최대 노선 개수(설정값을 초과할 시 **노선**과 **도착시간**만 간략하게 표시)   
-**maxDisplayBusStops** : MM2에 표시할 최대 동시 표시 정류장 개수   
+**maxDisplayBusStops** : MM2에 표시할 최대 동시 표시 정류장 개수
+**key** : 울산광역시 BIS 정보 API 인증키
    
    
 ## Dependency
