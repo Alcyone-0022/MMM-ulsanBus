@@ -11,7 +11,7 @@ module.exports = NodeHelper.create({
 	  switch(notification){
 		  case "BUSSTOP_DATA_REQUEST":
 			  
-			let pyshell = new PythonShell('../MagicMirror/modules/ulsanBus/ulsan_busArrivalInfo.py');
+			let pyshell = new PythonShell('../MagicMirror/modules/MMM-ulsanBus/ulsan_busArrivalInfo.py');
 			// pyshell.defaultOptions = { mode: 'json' };
 			pyshell.send(payload);
 

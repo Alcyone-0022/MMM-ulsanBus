@@ -1,4 +1,4 @@
-Module.register("ulsanBus", {
+Module.register("MMM-ulsanBus", {
     defaults: {
         busstop: {},
         updateInterval: 30000,
@@ -44,6 +44,8 @@ Module.register("ulsanBus", {
 
             // busStopBoxObjDict를 stopID로 접근하면 됨.
             // socketNotificationReceived에서 한번에 처리하기!
+			
+			this.config.busstop[busStop].push(this.config.key);
         }
     },
     getStyles: function() {
