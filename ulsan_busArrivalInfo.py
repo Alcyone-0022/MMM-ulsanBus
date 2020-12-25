@@ -15,14 +15,11 @@ terminal_input = input().split(',')
 stopID = int(terminal_input[0])
 
 # 초 단위; 곧 도착하는 노선의 남은 시간
-# arrives_soon_cut = 240
 arrives_soon_cut = int(terminal_input[1])
 
 # request data
 key = terminal_input[2]
 
-# # 대륙2차 193012613 법원(공업탑R방면) 193040605
-# stopID = 193040605
 queryParams = '?' + 'serviceKey=' + key + '&' + urlencode({'pageNo': '1', 'numOfRows': '50', 'stopid': stopID})
 
 # API request
