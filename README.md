@@ -4,7 +4,7 @@ MM2 module displays ulsan bus information.
 
 ![Alt text](/ulsanBus.png)         
 
-https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15052669
+https://www.data.go.kr/tcs/dss/selectApiDataDetailView.do?publicDataPk=15052669   
 울산광역시 BIS 정보 API를 이용한 울산 버스정보 모듈입니다.
 
 ## Embedding MMM-UlsanBus
