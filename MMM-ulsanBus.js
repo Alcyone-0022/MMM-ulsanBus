@@ -2,7 +2,7 @@ Module.register("MMM-ulsanBus", {
     defaults: {
         busstop: {},
         updateInterval: 30000,
-		busStopUpdateInterval: 10000,
+	busStopUpdateInterval: 10000,
         maxDisplayRoute: 15,
         maxDisplayBusStops: 2,
     },
@@ -10,8 +10,8 @@ Module.register("MMM-ulsanBus", {
         var self = this;
         Log.log("Starting module: " + this.name);
 
-		// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
-		// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
+	// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
+	// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
         this.getBusArrivalDataInterval = setInterval(function() {
             self.getBusArrivalData();
         }, self.config.updateInterval);
@@ -26,26 +26,26 @@ Module.register("MMM-ulsanBus", {
         this.displayIndex = 0;
 
         for (busStop in this.config.busstop) {
-            Log.log(busStop);
-            var busStopBox = document.createElement("div");
-            busStopBox.className = "box";
-            var busStopTitle = document.createElement("div");
-            busStopTitle.id = "busstop_title";
-            busStopTitle.innerHTML = '<i class="fas fa-bus"></i>' + busStop;
-            // Log.log("Creating busstop " + busStop);
-            busStopBox.appendChild(busStopTitle);
-            // child element 삭제 시를 위한 dummy
-            busStopBox.appendChild(document.createElement("div"));
+		Log.log(busStop);
+		var busStopBox = document.createElement("div");
+		busStopBox.className = "box";
+		var busStopTitle = document.createElement("div");
+		busStopTitle.id = "busstop_title";
+		busStopTitle.innerHTML = '<i class="fas fa-bus"></i>' + busStop;
+		// Log.log("Creating busstop " + busStop);
+		busStopBox.appendChild(busStopTitle);
+		// child element 삭제 시를 위한 dummy
+		busStopBox.appendChild(document.createElement("div"));
 
-            this.busStopBoxObjDict[this.config.busstop[busStop][0]] = busStopBox;
-            // Log.log(typeof busStopBox);
-            // Log.log(typeof this.busStopBoxObjDict[this.config.busstop[busStop][0]]);
-            // Log.log(this.busStopBoxObjDict);
+		this.busStopBoxObjDict[this.config.busstop[busStop][0]] = busStopBox;
+		// Log.log(typeof busStopBox);
+		// Log.log(typeof this.busStopBoxObjDict[this.config.busstop[busStop][0]]);
+		// Log.log(this.busStopBoxObjDict);
 
-            // busStopBoxObjDict를 stopID로 접근하면 됨.
-            // socketNotificationReceived에서 한번에 처리하기!
-			
-			this.config.busstop[busStop].push(this.config.key);
+		// busStopBoxObjDict를 stopID로 접근하면 됨.
+		// socketNotificationReceived에서 한번에 처리하기!
+
+		this.config.busstop[busStop].push(this.config.key);
         }
     },
     getStyles: function() {
@@ -66,10 +66,10 @@ Module.register("MMM-ulsanBus", {
             // 정류장들 순환 표시
             var currentDisplayIndex = this.displayIndex;
             for (let i = currentDisplayIndex; i < currentDisplayIndex + this.config.maxDisplayBusStops; i++) {
-				var dictKeys = Object.keys(this.config.busstop);
+		var dictKeys = Object.keys(this.config.busstop);
                 container.append(this.busStopBoxObjDict[this.config.busstop[dictKeys[i]][0]]);
                 this.displayIndex++;
-				if (this.displayIndex >= this.numberOfBusStops) { break; }
+		if (this.displayIndex >= this.numberOfBusStops) { break; }
             }
 
             if (this.displayIndex >= this.numberOfBusStops) {
@@ -84,16 +84,16 @@ Module.register("MMM-ulsanBus", {
         switch (notification) {
             case "DOM_OBJECTS_CREATED": // Log.log(typeof busStopData);
                 self.getBusArrivalData();
-				// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
-				// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
+		// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
+		// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
                 self.updateDomInterval = setInterval(function() {
                     self.updateDom();
                     // Log.log('updated');
                 }, this.config.busStopUpdateInterval);
                 break;
 				
-				// https://stackoverflow.com/questions/1068834/object-comparison-in-javascript
-				// 버스정보 맛간거 판독하는 코드 넣자
+		// https://stackoverflow.com/questions/1068834/object-comparison-in-javascript
+		// 버스정보 맛간거 판독하는 코드 넣자
         }
     },
     socketNotificationReceived: function(notification, payload) {
@@ -104,122 +104,122 @@ Module.register("MMM-ulsanBus", {
                 // Log.log(payload);
                 self.busStopData = JSON.parse(payload);
 				
-				arrivalRouteElem = document.createElement('div');
+		arrivalRouteElem = document.createElement('div');
                 arrivalRouteElem.id = 'arrivalRouteElem';
 				
-				// no_data
-				if (self.busStopData.hasOwnProperty('no_data')) {
-					infoString = document.createElement('div');
-					infoString.id = 'infoString';
-					infoString.innerHTML = '도착정보 없음';
-					infoString.style.fontWeight = 'bold';
-					infoString.style.color = 'grey';
+		// no_data
+		if (self.busStopData.hasOwnProperty('no_data')) {
+			infoString = document.createElement('div');
+			infoString.id = 'infoString';
+			infoString.innerHTML = '도착정보 없음';
+			infoString.style.fontWeight = 'bold';
+			infoString.style.color = 'grey';
 
-					arrivalRouteElem.append(infoString);
-					// Log.log('no_data' + self.busStopData['stopID'])
-				
-				// error
-				} else if (self.busStopData.hasOwnProperty('error')) {
-					errorString = document.createElement('div');
-					errorString.id = 'errorString';
-					errorString.innerHTML = 'ERROR!';
-					errorString.style.fontWeight = 'bold';
-					errorString.style.color = '#ff5733';
+			arrivalRouteElem.append(infoString);
+			// Log.log('no_data' + self.busStopData['stopID'])
 
-					arrivalRouteElem.append(errorString);
-					// Log.log('error' + self.busStopData['stopID'])
-					
-				// 데이터가 잘 넘어왔을 경우
-				} else {
-					arrivesSoonElem = document.createElement('div');
-					arrivesSoonElem.id = 'arrives_soon';
-					arrivesSoonElem.innerHTML = '곧 도착: ' + self.busStopData['arrives_soon'];
-					arrivesSoonElem.style.fontWeight = 'bold';
-					arrivesSoonElem.style.width = '200px';
-					arrivesSoonElem.style.color = '#ff5733';
-					arrivesSoonElem.style.wordBreak = 'break-word';
+		// error
+		} else if (self.busStopData.hasOwnProperty('error')) {
+			errorString = document.createElement('div');
+			errorString.id = 'errorString';
+			errorString.innerHTML = 'ERROR!';
+			errorString.style.fontWeight = 'bold';
+			errorString.style.color = '#ff5733';
 
-					arrivalRouteElem.append(arrivesSoonElem);
+			arrivalRouteElem.append(errorString);
+			// Log.log('error' + self.busStopData['stopID'])
 
-					var displayRouteCounter = 0;
-					// maxDisplayRoute 초과해서 표시 안 되는 노선들 간략하게 표시하는 span element 저장 배열
+		// 데이터가 잘 넘어왔을 경우
+		} else {
+			arrivesSoonElem = document.createElement('div');
+			arrivesSoonElem.id = 'arrives_soon';
+			arrivesSoonElem.innerHTML = '곧 도착: ' + self.busStopData['arrives_soon'];
+			arrivesSoonElem.style.fontWeight = 'bold';
+			arrivesSoonElem.style.width = '200px';
+			arrivesSoonElem.style.color = '#ff5733';
+			arrivesSoonElem.style.wordBreak = 'break-word';
 
-					for (JSON_arrivalRouteNM_Ordered of self.busStopData['arrival_Order']) {
-						// Log.log(JSON_arrivalRouteNM_Ordered);
-						// Log.log(self.busStopData['arrival_Order']);
-						// Log.log(typeof self.busStopData['arrival_Order']);
+			arrivalRouteElem.append(arrivesSoonElem);
 
-						lineElem = document.createElement('p');
-						lineElem.style.margin = '5px 0px 0px 2px';
+			var displayRouteCounter = 0;
+			// maxDisplayRoute 초과해서 표시 안 되는 노선들 간략하게 표시하는 span element 저장 배열
 
-						arrivalRouteNM = document.createElement('span');
-						arrivalRouteNM.innerHTML = JSON_arrivalRouteNM_Ordered;
-						arrivalRouteNM.style.fontWeight = 'bold';
+			for (JSON_arrivalRouteNM_Ordered of self.busStopData['arrival_Order']) {
+				// Log.log(JSON_arrivalRouteNM_Ordered);
+				// Log.log(self.busStopData['arrival_Order']);
+				// Log.log(typeof self.busStopData['arrival_Order']);
 
-						if (JSON_arrivalRouteNM_Ordered < 100) { // 마을버스
-							arrivalRouteNM.style.color = '#008800';
-						} else if (JSON_arrivalRouteNM_Ordered < 899) { //시내버스
-							arrivalRouteNM.style.color = '#FFCC00';
-						} else if (JSON_arrivalRouteNM_Ordered < 999) { //지선버스
-							arrivalRouteNM.style.color = '#00FFFD';
-						} else if (JSON_arrivalRouteNM_Ordered < 1999) { //좌석버스
-							arrivalRouteNM.style.color = '#3380ff';
-						} else if (JSON_arrivalRouteNM_Ordered < 5999) { //급행버스
-							arrivalRouteNM.style.color = '#ff5733';
-						}
-						
-						arrivalRouteInfo = document.createElement('span');
+				lineElem = document.createElement('p');
+				lineElem.style.margin = '5px 0px 0px 2px';
 
-						// 남은 시간
-						var busStopData_html = " <i class=\"far fa-clock\"></i>";
-						busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][0];
-						
-						// 최대 표시 노선 수 초과할 시 간략하게 표시
-						if (displayRouteCounter >= this.config.maxDisplayRoute) {
-							briefArrivalRoute = document.createElement('div');
-							briefArrivalRoute.id = 'briefArrivalRouteElem';
-							
-							arrivalRouteNM.style.fontSize = '15px';
-							briefArrivalRoute.append(arrivalRouteNM);
-							briefArrivalRoute.append(document.createElement('br'));
-							arrivalRouteInfo.innerHTML = busStopData_html;
-							arrivalRouteInfo.style.color = 'white';
-							briefArrivalRoute.append(arrivalRouteInfo);
-							// briefArrivalRoute.append(document.createElement('br'));
+				arrivalRouteNM = document.createElement('span');
+				arrivalRouteNM.innerHTML = JSON_arrivalRouteNM_Ordered;
+				arrivalRouteNM.style.fontWeight = 'bold';
 
-							arrivalRouteElem.appendChild(briefArrivalRoute);
-
-							displayRouteCounter++;
-							// briefRouteElements.push(briefArrivalRoute);
-							continue;
-						}
-						
-						// 남은 정류장
-						busStopData_html += '<br>'
-						busStopData_html += "<i class=\"fas fa-arrow-left\"></i> ";
-						busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][1];
-						// 현재 정류장
-						busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][2];
-
-						arrivalRouteInfo.innerHTML = busStopData_html;
-						arrivalRouteInfo.style.color = 'white';
-
-						lineElem.appendChild(arrivalRouteNM);
-						lineElem.appendChild(arrivalRouteInfo);
-
-						arrivalRouteElem.appendChild(lineElem);
-
-						displayRouteCounter++;
-					}
+				if (JSON_arrivalRouteNM_Ordered < 100) { // 마을버스
+					arrivalRouteNM.style.color = '#008800';
+				} else if (JSON_arrivalRouteNM_Ordered < 899) { //시내버스
+					arrivalRouteNM.style.color = '#FFCC00';
+				} else if (JSON_arrivalRouteNM_Ordered < 999) { //지선버스
+					arrivalRouteNM.style.color = '#00FFFD';
+				} else if (JSON_arrivalRouteNM_Ordered < 1999) { //좌석버스
+					arrivalRouteNM.style.color = '#3380ff';
+				} else if (JSON_arrivalRouteNM_Ordered < 5999) { //급행버스
+					arrivalRouteNM.style.color = '#ff5733';
 				}
 
-                
+				arrivalRouteInfo = document.createElement('span');
+
+				// 남은 시간
+				var busStopData_html = " <i class=\"far fa-clock\"></i>";
+				busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][0];
+
+				// 최대 표시 노선 수 초과할 시 간략하게 표시
+				if (displayRouteCounter >= this.config.maxDisplayRoute) {
+					briefArrivalRoute = document.createElement('div');
+					briefArrivalRoute.id = 'briefArrivalRouteElem';
+
+					arrivalRouteNM.style.fontSize = '15px';
+					briefArrivalRoute.append(arrivalRouteNM);
+					briefArrivalRoute.append(document.createElement('br'));
+					arrivalRouteInfo.innerHTML = busStopData_html;
+					arrivalRouteInfo.style.color = 'white';
+					briefArrivalRoute.append(arrivalRouteInfo);
+					// briefArrivalRoute.append(document.createElement('br'));
+
+					arrivalRouteElem.appendChild(briefArrivalRoute);
+
+					displayRouteCounter++;
+					// briefRouteElements.push(briefArrivalRoute);
+					continue;
+				}
+
+				// 남은 정류장
+				busStopData_html += '<br>'
+				busStopData_html += "<i class=\"fas fa-arrow-left\"></i> ";
+				busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][1];
+				// 현재 정류장
+				busStopData_html += self.busStopData[JSON_arrivalRouteNM_Ordered][2];
+
+				arrivalRouteInfo.innerHTML = busStopData_html;
+				arrivalRouteInfo.style.color = 'white';
+
+				lineElem.appendChild(arrivalRouteNM);
+				lineElem.appendChild(arrivalRouteInfo);
+
+				arrivalRouteElem.appendChild(lineElem);
+
+				displayRouteCounter++;
+			}
+		}
+
+
 
                 // 이전에 추가한 요소들 삭제하고 다시 추가
                 var busStopBoxElem = this.busStopBoxObjDict[self.busStopData['stopID']];
                 busStopBoxElem.removeChild(busStopBoxElem.children[1]);
                 busStopBoxElem.append(arrivalRouteElem);
-				break;
+		break;
 		}
     },
     getBusArrivalData: function() {
