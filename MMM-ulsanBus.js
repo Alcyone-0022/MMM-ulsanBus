@@ -116,8 +116,8 @@ Module.register("MMM-ulsanBus", {
 					infoString.style.color = 'grey';
 
 					arrivalRouteElem.append(infoString);
-					Log.log('no_data ' + self.busStopData['stopID']);
-					Log.log(arrivalRouteElem);
+					// Log.log('no_data ' + self.busStopData['stopID']);
+					// Log.log(arrivalRouteElem);
 
 				// error
 				} else if (self.busStopData.hasOwnProperty('error')) {
