@@ -77,10 +77,11 @@ else:
         presentStop = i.findtext('PRESENTSTOPNM')
         # print(presentStop + ')')
         busArrivalDataList.append('(' + presentStop + ')')
-
-        busstop_arrivalDataDict[routeNM_intonly] = busArrivalDataList
-        busstop_arrivalOrder.append(routeNM_intonly)
-        # busstop_arrivalDataDict[routeNM] = busArrivalDataString
+        
+        if routeNM_intonly not in busstop_arrivalOrder:
+            busstop_arrivalDataDict[routeNM_intonly] = busArrivalDataList
+            busstop_arrivalOrder.append(routeNM_intonly)
+            # busstop_arrivalDataDict[routeNM] = busArrivalDataString
 
 
 # 오름차순 정렬, key 값 기준
