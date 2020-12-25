@@ -116,7 +116,8 @@ Module.register("MMM-ulsanBus", {
 					infoString.style.color = 'grey';
 
 					arrivalRouteElem.append(infoString);
-					// Log.log('no_data' + self.busStopData['stopID'])
+					Log.log('no_data ' + self.busStopData['stopID']);
+					Log.log(arrivalRouteElem);
 
 				// error
 				} else if (self.busStopData.hasOwnProperty('error')) {
@@ -209,7 +210,7 @@ Module.register("MMM-ulsanBus", {
 						displayRouteCounter++;
 					}
 						
-						
+					
 					// 이전에 추가한 요소들 삭제하고 다시 추가
 					var busStopBoxElem = this.busStopBoxObjDict[self.busStopData['stopID']];
 					busStopBoxElem.removeChild(busStopBoxElem.children[1]);

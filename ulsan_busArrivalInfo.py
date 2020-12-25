@@ -19,7 +19,6 @@ stopID = int(terminal_input[0])
 arrives_soon_cut = int(terminal_input[1])
 
 # request data
-# key = "TRekJec4iz%2BlT5wZwy56C3AxHC3YaM35svqI7HHTMx0PM3K%2BsuVZbVnRN8BAv%2BTgA6eAAXeT5m865H%2BvKW%2BecA%3D%3D"
 key = terminal_input[2]
 
 # # 대륙2차 193012613 법원(공업탑R방면) 193040605
@@ -71,6 +70,7 @@ else:
         else:
             # print(str(int(arrivalTime / 60)) + '분', end=", ")
             busArrivalDataList.append(str(int(arrivalTime / 60)) + '분')
+
         prevStopCount = i.findtext('PREVSTOPCNT')
         # print(prevStopCount + '정거장 전', end='(')
         busArrivalDataList.append(prevStopCount + '전')
