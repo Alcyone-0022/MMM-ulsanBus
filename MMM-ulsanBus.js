@@ -10,8 +10,8 @@ Module.register("MMM-ulsanBus", {
         var self = this;
         Log.log("Starting module: " + this.name);
 
-	// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
-	// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
+		// https://stackoverflow.com/questions/109086/stop-setinterval-call-in-javascript
+		// PIR Sensor 모듈과 연동; 타이머 껐다 켜기 위함
         this.getBusArrivalDataInterval = setInterval(function() {
             self.getBusArrivalData();
         }, self.config.updateInterval);
