@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 import xml.etree.ElementTree as ET
 import re
 import json
+import time
 
 
 # terminal_input = json.loads(input())
@@ -38,6 +39,7 @@ while True:
         break
     except (HTTPError, URLError):
         # print(e.reason)
+        time.sleep(10)
         continue
 
 # 받은 정보 XML 파싱 준비
