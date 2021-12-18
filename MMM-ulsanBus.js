@@ -212,9 +212,8 @@ Module.register("MMM-ulsanBus", {
 							//do nothing
 						} else {
 							arrivalRouteElem.appendChild(lineElem);
+							displayRouteCounter++;
 						}
-						
-						displayRouteCounter++;
 					}
 				}
 			// 이전에 추가한 요소들 삭제하고 다시 추가
