@@ -53,7 +53,6 @@ else:
     tree = ET.fromstring(xmlData)
     # print(tree.tag)
     for i in tree.iter('row'):
-        # print("row")
         # 도착정보 스트링 초기화
         busArrivalDataList = []
 
@@ -62,8 +61,10 @@ else:
         routeNM_intonly = int(routeNM_intonly_regexobj.group())
         # print(routeNM_intonly, end=": ")
         arrivalTime = int(i.findtext('ARRIVALTIME'))
-        if arrivalTime < arrives_soon_cut:
-            # print('곧 도착', end=', ')
+	# 30분 이상 걸리는 노선은 표시하지 않음
+        if arrivalTime > 1800:
+            continue
+        elif arrivalTime < arrives_soon_cut:
             busArrivalDataList.append('곧 도착')
             if routeNM_intonly not in busstop_routeArrivesSoon:
                 busstop_routeArrivesSoon.append(routeNM_intonly)
