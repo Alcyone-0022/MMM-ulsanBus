@@ -208,9 +208,12 @@ Module.register("MMM-ulsanBus", {
 
 						lineElem.appendChild(arrivalRouteNM);
 						lineElem.appendChild(arrivalRouteInfo);
-
-						arrivalRouteElem.appendChild(lineElem);
-
+						if (self.busStopData[JSON_arrivalRouteNM_Ordered][0] == "곧 도착") {
+							//do nothing
+						} else {
+							arrivalRouteElem.appendChild(lineElem);
+						}
+						
 						displayRouteCounter++;
 					}
 				}
