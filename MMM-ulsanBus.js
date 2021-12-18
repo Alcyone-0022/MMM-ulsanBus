@@ -26,26 +26,26 @@ Module.register("MMM-ulsanBus", {
         this.displayIndex = 0;
 
         for (busStop in this.config.busstop) {
-		Log.log(busStop);
-		var busStopBox = document.createElement("div");
-		busStopBox.className = "box";
-		var busStopTitle = document.createElement("div");
-		busStopTitle.id = "busstop_title";
-		busStopTitle.innerHTML = '<i class="fas fa-bus"></i>' + busStop;
-		// Log.log("Creating busstop " + busStop);
-		busStopBox.appendChild(busStopTitle);
-		// child element 삭제 시를 위한 dummy
-		busStopBox.appendChild(document.createElement("div"));
+			Log.log(busStop);
+			var busStopBox = document.createElement("div");
+			busStopBox.className = "box";
+			var busStopTitle = document.createElement("div");
+			busStopTitle.id = "busstop_title";
+			busStopTitle.innerHTML = '<i class="fas fa-bus"></i>' + busStop;
+			// Log.log("Creating busstop " + busStop);
+			busStopBox.appendChild(busStopTitle);
+			// child element 삭제 시를 위한 dummy
+			busStopBox.appendChild(document.createElement("div"));
 
-		this.busStopBoxObjDict[this.config.busstop[busStop][0]] = busStopBox;
-		// Log.log(typeof busStopBox);
-		// Log.log(typeof this.busStopBoxObjDict[this.config.busstop[busStop][0]]);
-		// Log.log(this.busStopBoxObjDict);
+			this.busStopBoxObjDict[this.config.busstop[busStop][0]] = busStopBox;
+			// Log.log(typeof busStopBox);
+			// Log.log(typeof this.busStopBoxObjDict[this.config.busstop[busStop][0]]);
+			// Log.log(this.busStopBoxObjDict);
 
-		// busStopBoxObjDict를 stopID로 접근하면 됨.
-		// socketNotificationReceived에서 한번에 처리하기!
+			// busStopBoxObjDict를 stopID로 접근하면 됨.
+			// socketNotificationReceived에서 한번에 처리하기!
 
-		this.config.busstop[busStop].push(this.config.key);
+			this.config.busstop[busStop].push(this.config.key);
         }
     },
     getStyles: function() {
@@ -79,7 +79,7 @@ Module.register("MMM-ulsanBus", {
 
         return container;
     },
-    notificationReceived: function(notification, payload, sender) {
+    notificationReceived: function(notification, payload) {
         var self = this;
         switch (notification) {
             case "DOM_OBJECTS_CREATED": // Log.log(typeof busStopData);
@@ -134,11 +134,9 @@ Module.register("MMM-ulsanBus", {
 				} else {
 					arrivesSoonElem = document.createElement('div');
 					arrivesSoonElem.id = 'arrives_soon';
-					arrivesSoonElem.innerHTML = '곧 도착: ' + self.busStopData['arrives_soon'];
-					arrivesSoonElem.style.fontWeight = 'bold';
-					arrivesSoonElem.style.width = '200px';
-					arrivesSoonElem.style.color = '#ff5733';
-					arrivesSoonElem.style.wordBreak = 'break-word';
+					var arrivesSoonStr = self.busStopData['arrives_soon'].toString().replace(/\,/g, " ");
+					// arrivesSoonStr.toString().replace(/,/, " ");
+					arrivesSoonElem.innerHTML = '곧 도착: ' + arrivesSoonStr;
 
 					arrivalRouteElem.append(arrivesSoonElem);
 
@@ -180,15 +178,18 @@ Module.register("MMM-ulsanBus", {
 							briefArrivalRoute = document.createElement('div');
 							briefArrivalRoute.id = 'briefArrivalRouteElem';
 
-							arrivalRouteNM.style.fontSize = '15px';
+							arrivalRouteNM.style.fontSize = '17px';
 							briefArrivalRoute.append(arrivalRouteNM);
 							briefArrivalRoute.append(document.createElement('br'));
 							arrivalRouteInfo.innerHTML = busStopData_html;
 							arrivalRouteInfo.style.color = 'white';
 							briefArrivalRoute.append(arrivalRouteInfo);
 							// briefArrivalRoute.append(document.createElement('br'));
-
-							arrivalRouteElem.appendChild(briefArrivalRoute);
+							if (self.busStopData[JSON_arrivalRouteNM_Ordered][0] == "곧 도착") {
+								continue;
+							} else {
+								arrivalRouteElem.appendChild(briefArrivalRoute);
+							}
 							continue;
 						}
 						
@@ -204,10 +205,12 @@ Module.register("MMM-ulsanBus", {
 
 						lineElem.appendChild(arrivalRouteNM);
 						lineElem.appendChild(arrivalRouteInfo);
-
-						arrivalRouteElem.appendChild(lineElem);
-
-						displayRouteCounter++;
+						if (self.busStopData[JSON_arrivalRouteNM_Ordered][0] == "곧 도착") {
+							//do nothing
+						} else {
+							arrivalRouteElem.appendChild(lineElem);
+							displayRouteCounter++;
+						}
 					}
 				}
 			// 이전에 추가한 요소들 삭제하고 다시 추가
