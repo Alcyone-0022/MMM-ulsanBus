@@ -136,10 +136,10 @@ Module.register("MMM-ulsanBus", {
 					arrivesSoonElem.id = 'arrives_soon';
 					//CSS로 빼자
 					arrivesSoonElem.innerHTML = '곧 도착: ' + self.busStopData['arrives_soon'];
-					arrivesSoonElem.style.fontWeight = 'bold';
-					arrivesSoonElem.style.width = '180px';
-					arrivesSoonElem.style.color = '#ff5733';
-					arrivesSoonElem.style.wordBreak = 'break-word';
+					// arrivesSoonElem.style.fontWeight = 'bold';
+					// arrivesSoonElem.style.width = '180px';
+					// arrivesSoonElem.style.color = '#ff5733';
+					// arrivesSoonElem.style.wordBreak = 'break-word';
 
 					arrivalRouteElem.append(arrivesSoonElem);
 
@@ -181,7 +181,7 @@ Module.register("MMM-ulsanBus", {
 							briefArrivalRoute = document.createElement('div');
 							briefArrivalRoute.id = 'briefArrivalRouteElem';
 
-							arrivalRouteNM.style.fontSize = '15px';
+							arrivalRouteNM.style.fontSize = '17px';
 							briefArrivalRoute.append(arrivalRouteNM);
 							briefArrivalRoute.append(document.createElement('br'));
 							arrivalRouteInfo.innerHTML = busStopData_html;

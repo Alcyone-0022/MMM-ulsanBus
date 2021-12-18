@@ -20,6 +20,14 @@
   margin: -5px 0px -5px 0px;
 }
 
+#arrives_soon {
+	font-weight: bold;
+	width: 180px;
+	color: #ff5733;
+	word-break: break-word;
+	margin-bottom: 10px;
+}
+
 #arrivalRouteElem {
 	font-size: 15px;
 	/* font-weight: bold; */
@@ -29,7 +37,7 @@
 }
 
 #briefArrivalRouteElem {
-	font-size: 13px;
+	font-size: 14px;
 	width: 25%;
 	/* font-weight: bold; */
 	line-height: 120%;
