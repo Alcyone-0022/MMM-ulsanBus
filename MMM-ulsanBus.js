@@ -134,7 +134,7 @@ Module.register("MMM-ulsanBus", {
 				} else {
 					arrivesSoonElem = document.createElement('div');
 					arrivesSoonElem.id = 'arrives_soon';
-					var arrivesSoonStr = self.busStopData['arrives_soon'].toString().replace(/,/, " ");
+					var arrivesSoonStr = self.busStopData['arrives_soon'].toString().replace(/\,/g, " ");
 					// arrivesSoonStr.toString().replace(/,/, " ");
 					arrivesSoonElem.innerHTML = '곧 도착: ' + arrivesSoonStr;
 
