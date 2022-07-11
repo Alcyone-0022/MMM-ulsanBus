@@ -33,14 +33,21 @@ busstop_routeArrivesSoon = []
 # js json.parse 시 오름차순 정렬 -> 먼저 도착하는 노선 먼저 표시하도록 순서 보존하는 리스트
 busstop_arrivalOrder = []
 
-while True:
+for i in range(5):
     try:
         request = urllib.request.urlopen(url)
         break
     except (HTTPError, URLError):
         # print(e.reason)
-        time.sleep(10)
-        continue
+
+        # retry 5 times if failed
+        time.sleep(5)
+        if i == 4:
+            busstop_arrivalDataDict["error"] = "error"
+            busstop_arrivalDataDict["stopID"] = stopID
+        else:
+            continue
+
 
 # 받은 정보 XML 파싱 준비
 xmlData = request.read().decode('utf-8')
