@@ -156,7 +156,7 @@ Module.register("MMM-ulsanBus", {
 						arrivalRouteNM.style.fontWeight = 'bold';
 
 						if (JSON_arrivalRouteNM_Ordered < 100) { // 마을버스
-							arrivalRouteNM.style.color = '#008800';
+							arrivalRouteNM.style.color = '#00fb00';
 						} else if (JSON_arrivalRouteNM_Ordered < 899) { //시내버스
 							arrivalRouteNM.style.color = '#FFCC00';
 						} else if (JSON_arrivalRouteNM_Ordered < 999) { //지선버스
