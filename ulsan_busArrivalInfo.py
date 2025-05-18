@@ -64,11 +64,11 @@ else:
         busArrivalDataList = []
 
         routeNM = i.findtext('ROUTENM')
-        routeNM_intonly_regexobj = re.match('[0-9]+', routeNM)
-        routeNM_intonly = int(routeNM_intonly_regexobj.group())
+        # routeNM_intonly_regexobj = re.match('[0-9]+', routeNM)
+        # routeNM_intonly = int(routeNM_intonly_regexobj.group())
         # print(routeNM_intonly, end=": ")
         arrivalTime = int(i.findtext('ARRIVALTIME'))
-	# 30분 이상 걸리는 노선은 표시하지 않음
+        # 30분 이상 걸리는 노선은 표시하지 않음
         if arrivalTime > 1800:
             continue
         elif arrivalTime < arrives_soon_cut:
@@ -86,9 +86,9 @@ else:
         # print(presentStop + ')')
         busArrivalDataList.append('(' + presentStop + ')')
 
-        if routeNM_intonly not in busstop_arrivalDataDict:
-            busstop_arrivalDataDict[routeNM_intonly] = busArrivalDataList
-            busstop_arrivalOrder.append(routeNM_intonly)
+        if routeNM not in busstop_arrivalDataDict:
+            busstop_arrivalDataDict[routeNM] = busArrivalDataList
+            busstop_arrivalOrder.append(routeNM)
             # busstop_arrivalDataDict[routeNM] = busArrivalDataString
 
 
