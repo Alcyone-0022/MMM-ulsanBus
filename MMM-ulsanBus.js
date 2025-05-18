@@ -169,27 +169,25 @@ Module.register("MMM-ulsanBus", {
 
 						// set route color
 						    if (!isNaN(JSON_arrivalRouteNM_Ordered)){
-							if (JSON_arrivalRouteNM_Ordered < 100) { // 마을버스
-							    arrivalRouteNM.style.color = '#00fb00';
-							} else if (JSON_arrivalRouteNM_Ordered < 899) { //시내버스
-							    arrivalRouteNM.style.color = '#FFCC00';
-							} else if (JSON_arrivalRouteNM_Ordered < 1999) { //좌석버스
-							    arrivalRouteNM.style.color = '#3380ff';
-							} else if (JSON_arrivalRouteNM_Ordered < 5999) { //급행버스
-							    arrivalRouteNM.style.color = '#ff5733';
-							}
+								if (JSON_arrivalRouteNM_Ordered < 100) { // 마을버스
+									arrivalRouteNM.style.color = '#00fb00';
+								} else if (JSON_arrivalRouteNM_Ordered < 899) { //시내버스
+									arrivalRouteNM.style.color = '#FFCC00';
+								} else if (JSON_arrivalRouteNM_Ordered < 1999) { //좌석버스
+									arrivalRouteNM.style.color = '#3380ff';
+								} else if (JSON_arrivalRouteNM_Ordered < 5999) { //급행버스
+									arrivalRouteNM.style.color = '#ff5733';
+								}
 						    } else {
-							let routeToInt = parseInt(JSON_arrivalRouteNM_Ordered.slice(-2));
-					
-							if (JSON_arrivalRouteNM_Ordered.slice(0, 2) == "순환") {
-							    arrivalRouteNM.style.color = '#FFBC00';
-							}else if (JSON_arrivalRouteNM_Ordered < 50) { // 지선버스
-							    arrivalRouteNM.style.color = '#00FFFD';
-							} else if (JSON_arrivalRouteNM_Ordered < 80) { // 마을버스
-							    arrivalRouteNM.style.color = '#99CC66';
-							} else if (JSON_arrivalRouteNM_Ordered < 100) { // 마실버스
-							    arrivalRouteNM.style.color = '#FFBC00';
-							}
+								let routeToInt = parseInt(JSON_arrivalRouteNM_Ordered.slice(-2));
+						
+								if (routeToInt < 40) { // 순환버스
+									arrivalRouteNM.style.color = '#FFBC00';
+								}else if (routeToInt < 50) { // 지선버스
+									arrivalRouteNM.style.color = '#00FFFD';
+								} else if (routeToInt < 80) { // 마을버스
+									arrivalRouteNM.style.color = '#99CC66';
+								}
 						    }
 
 						arrivalRouteInfo = document.createElement('span');
