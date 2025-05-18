@@ -62,8 +62,8 @@ else:
     for i in tree.iter('row'):
         # 도착정보 스트링 초기화
         busArrivalDataList = []
-
         routeNM = i.findtext('ROUTENM')
+        routeNM = routeNM[:4]
         # routeNM_intonly_regexobj = re.match('[0-9]+', routeNM)
         # routeNM_intonly = int(routeNM_intonly_regexobj.group())
         # print(routeNM_intonly, end=": ")
@@ -73,8 +73,8 @@ else:
             continue
         elif arrivalTime < arrives_soon_cut:
             busArrivalDataList.append('곧 도착')
-            if routeNM_intonly not in busstop_routeArrivesSoon:
-                busstop_routeArrivesSoon.append(routeNM_intonly)
+            if routeNM not in busstop_routeArrivesSoon:
+                busstop_routeArrivesSoon.append(routeNM)
         else:
             # print(str(int(arrivalTime / 60)) + '분', end=", ")
             busArrivalDataList.append(str(int(arrivalTime / 60)) + '분')
